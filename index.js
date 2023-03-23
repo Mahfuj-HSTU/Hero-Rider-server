@@ -23,19 +23,17 @@ async function run() {
 	const usersCollection = client.db('HeroRider').collection('users');
 
 	try {
-		// post bills
-		app.post('api/users', async (req, res) => {
-			const service = req.body;
-			// const result = await usersCollection.insertOne(service);
-			// res.json(result);
+		// post users
+		app.post('/users', async (req, res) => {
+			const user = req.body;
+			const result = await usersCollection.insertOne(user);
+			res.send(result);
 		});
 
-		// get bills
-		app.get('/api/users', async (req, res) => {
-			const query = {};
-			const cursor = usersCollection.find(query);
-			// const bills = await cursor.toArray();
-			// res.send(bills);
+		app.get('/users', async (req, res) => {
+			const user = {};
+			const result = await usersCollection.find(user).toArray();
+			res.send(result);
 		});
 	} finally {
 	}
